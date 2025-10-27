@@ -1,4 +1,3 @@
-
 # Basic instructions
 
 * Create a number of variants of the html + the js-file (now named index.html + main.js), so that each html-file has it's own js-file and functions differently. All pages shall use the same css file
