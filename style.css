@@ -4,3 +4,9 @@
   border-radius: 10px;
   margin-bottom: 20px;
 }
+
+.search-field {
+  width: calc(100% - 25px);
+  margin-bottom: 20px;
+  padding: 10px;
+}
