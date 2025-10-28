@@ -1,3 +1,5 @@
+import {calculatedAge} from './joel.js';
+
 // read json from a url using fetch and get the response
 const peopleRaw = await fetch('people.json');
 
@@ -37,11 +39,12 @@ function render(search = '') {
     // sort by firstName
     .toSorted((a, b) => a.firstName > b.firstName ? 1 : - 1)
     // map to convert each element to a string with html
-    .map(({ firstName, lastName, email }) => `
+    .map(({ firstName, lastName, email, birthDate }) => `
     <section class="person">
       <p><b>First name:</b> ${firstName}</p>
       <p><b>Last name:</b> ${lastName}</p>
       <p><b>Email:</b> ${email}</p>
+      <p><b>Age:</b> ${calculatedAge(birthDate)}</p>
     </section>
   `)
     // join to join our array of strings into one large string
@@ -63,4 +66,3 @@ document.querySelector('.search-field')
 
 // initial rendering of list of people to screen
 render();
-
