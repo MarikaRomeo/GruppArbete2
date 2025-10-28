@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filter & Sort by Email</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <nav>
-    <a href="index.html">Start</a>
-    <a href="lastname.html">By Lastname</a>
-    <a href="age.html">By Age</a>
-    <a href="email.html">By Email</a>
-  </nav>
+  <div class="wrapper">
+    <nav>
+      <a href="index.html">Start</a>
+      <a href="lastname.html">By Lastname</a>
+      <a href="age.html">By Age</a>
+      <a href="email.html">By Email</a>
+    </nav>
 
-  <h1>Filter and Sort by Email</h1>
+    <div class="h1title">
+      <h1>Filter and Sort by Email</h1>
+    </div>
 
-  <input type="text" id="filterInput" placeholder="Filter by email...">
-  <button id="sortBtn">Sort by email (A–Z)</button>
+    <div class="search-container">
+      <input type="text" id="filterInput" placeholder="Filter by email...">
+      <button id="sortBtn">Sort by email (A–Z)</button>
 
-  <ul id="peopleList"></ul>
+
+      <ul id="peopleList"></ul>
+      <div class="search-container">
+      </div>
+    </div>
+  </div>
 
   <script src="email.js"></script>
 </body>
+
 </html>
