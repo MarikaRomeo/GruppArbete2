@@ -3,42 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Filter & Sort by Email</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Personer – Email Filter & Sort</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input { margin-bottom: 10px; padding: 5px; width: 200px; }
+    button { margin-right: 5px; padding: 5px 10px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f4f4f4; }
+  </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Meny</a>
-    <a href="index_age.html">Ålder</a>
-    <a href="index_lastname.html">Efternamn</a>
-    <a href="index_email.html" class="active">E-post</a>
-    <a href="index_sortchoice.html">Valbar sortering</a>
-  </nav>
+  <h1>Personer – Filtrera & Sortera på Email</h1>
 
-  <h1>Filter och sortera efter e-post</h1>
+  <!-- Filter input -->
+  <input type="text" id="emailFilter" placeholder="Sök efter email...">
+  <button id="sortAsc">Sortera A–Ö</button>
+  <button id="sortDesc">Sortera Ö–A</button>
 
-  <div class="controls">
-    <label for="emailFilter">Filtrera e-post:</label>
-    <input type="text" id="emailFilter" placeholder="Skriv del av e-post...">
-
-    <button id="sortAsc">Sortera A–Ö</button>
-    <button id="sortDesc">Sortera Ö–A</button>
-  </div>
-
-  <table id="userTable">
+  <!-- Tabell för personer -->
+  <table>
     <thead>
       <tr>
-        <th>ID</th>
         <th>Förnamn</th>
         <th>Efternamn</th>
-        <th>E-post</th>
+        <th>Email</th>
         <th>Födelsedatum</th>
       </tr>
     </thead>
-    <tbody></tbody>
+    <tbody id="personTableBody">
+      <!-- Personer kommer att laddas här -->
+    </tbody>
   </table>
 
-  <!-- Viktigt: typ="module" krävs för att import/export ska fungera -->
-  <script type="module" src="js/main_email.js"></script>
+  <script>
+    let people = [];
+
+    // Hämta alla personer från people.json
+    fetch('people.json')
+      .then(response => response.json())
+      .then(data => {
+        people = data;
+        displayPeople(people);
+      });
+
+    const tableBody = document.getElementById('personTableBody');
+    const emailFilter = document.getElementById('emailFilter');
+
+    // Visa personer i tabellen
+    function displayPeople(list) {
+      tableBody.innerHTML = '';
+      list.forEach(person => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${person.firstName}</td>
+          <td>${person.lastName}</td>
+          <td>${person.email}</td>
+          <td>${person.birthDate}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    // Filtrera personer baserat på email
+    emailFilter.addEventListener('input', () => {
+      const filterText = emailFilter.value.toLowerCase();
+      const filtered = people.filter(p => p.email.toLowerCase().includes(filterText));
+      displayPeople(filtered);
+    });
+
+    // Sortera stigande
+    document.getElementById('sortAsc').addEventListener('click', () => {
+      const sorted = [...people].sort((a, b) => a.email.localeCompare(b.email));
+      displayPeople(sorted);
+    });
+
+    // Sortera fallande
+    document.getElementById('sortDesc').addEventListener('click', () => {
+      const sorted = [...people].sort((a, b) => b.email.localeCompare(a.email));
+      displayPeople(sorted);
+    });
+  </script>
 </body>
 </html>
