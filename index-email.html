@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filter & Sort by Email</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Meny</a>
+    <a href="index_age.html">Ålder</a>
+    <a href="index_lastname.html">Efternamn</a>
+    <a href="index_email.html" class="active">E-post</a>
+    <a href="index_sortchoice.html">Valbar sortering</a>
+  </nav>
+
+  <h1>Filter och sortera efter e-post</h1>
+
+  <div class="controls">
+    <label for="emailFilter">Filtrera e-post:</label>
+    <input type="text" id="emailFilter" placeholder="Skriv del av e-post...">
+
+    <button id="sortAsc">Sortera A–Ö</button>
+    <button id="sortDesc">Sortera Ö–A</button>
+  </div>
+
+  <table id="userTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Förnamn</th>
+        <th>Efternamn</th>
+        <th>E-post</th>
+        <th>Födelsedatum</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script src="js/main_email.js"></script>
+</body>
+</html>
